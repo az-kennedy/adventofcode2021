@@ -13,7 +13,9 @@ $index = 0
 for ($i = 0; $i -lt $max; $i++) {
   $fuelSpent = 0
   foreach ($crab in $positions) {
-    $fuelSpent += $([Math]::Abs($crab - $i))
+    #$fuelSpent += $([Math]::Abs($crab - $i))
+    $distance = $([Math]::Abs($crab - $i))
+    $fuelSpent += (($distance*($distance+1))/2)
   }
 
   if ($lowestFuelCost -eq 0) {
