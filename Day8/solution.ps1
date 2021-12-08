@@ -17,21 +17,82 @@ $four = 4
 $seven = 3
 $eight = 7
 
-#pattern coding
-$two = 'gcdfa'
-$three = 'fbcad'
-$five = 'cdfbe'
-$six = 'cdfgeb'
-$nine = 'cefabd'
-#$nine = 'abcdfg'
-$zero = 'cagedb'
-#$zero = 'abcegf'
-
-
 $sum = 0
 
 $readings = $data.Split([Environment]::NewLine)
 
+
+foreach ($reading in $readings) {
+  # Skip Blank Lines
+  if ($reading -eq '') {
+      continue
+  }
+
+  $signals = $reading.Split('|')[0]
+  try{$signals = $signals.Trim()}catch{}
+  $signals = $signals.Split(' ')
+
+  $output = $reading.Split('|')[1]
+  try{$output = $output.Trim()}catch{}
+  $output = $output.Split(' ')
+
+
+  # Define the variables need . . .
+  $zeroKey = ''
+  $oneKey = ''
+  $twoKey = ''
+  $threeKey = ''
+  $fourKey = ''
+  $fiveKey = ''
+  $sixKey = ''
+  $sevenKey = ''
+  $eightKey = ''
+  $nineKey = ''
+
+  # Determine the signal strings
+  foreach ($signal in $signals) {
+    $length = $signal.Length
+
+    # 0
+
+    # 1
+    if ($length -eq $one) {
+      $oneKey = $signal
+    }
+
+    # 2
+
+    # 3
+
+    # 4
+
+    # 5
+
+    # 6
+
+    # 7
+
+    # 8
+
+    # 9
+  }
+
+  # Match signal keys with the output
+  $readingOutput = ''
+  $sum = 0
+  foreach ($code in $output) {
+    if ($code -eq $oneKey) {
+      $readingOutput += '1'
+    }
+  }
+  
+
+  Write-Host "String [$output] output converted to : [$readingOutput]"
+}
+
+
+
+<#
 
 foreach ($reading in $readings) {
     if ($reading -eq '') {
@@ -97,5 +158,7 @@ foreach ($reading in $readings) {
 
     Write-Host "String [$output] output converted to : [$readingOutput]"
 }
+
+#>
 
 return
