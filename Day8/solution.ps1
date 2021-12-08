@@ -23,7 +23,10 @@ $three = 'fbcad'
 $five = 'cdfbe'
 $six = 'cdfgeb'
 $nine = 'cefabd'
+#$nine = 'abcdfg'
 $zero = 'cagedb'
+#$zero = 'abcegf'
+
 
 $sum = 0
 
@@ -34,47 +37,63 @@ foreach ($reading in $readings) {
     if ($reading -eq '') {
         continue
     }
-    #$input = $reading.Split('|')[0]
+    $signalWires = $reading.Split('|')[0]
     $output = $reading.Split('|')[1]
     try{$output = $output.Trim()}catch{}
 
     $oneRead = $output.Split(' ')
     $readingOutput = ''
+    $tmpstr = ''
+    $sum = 0
 
     foreach ($item in $oneRead) {
-        $length = $item.Length
+      $length = $item.Length
+        
+      # Part One: Handle the knowns already 1,4,7,8 . . .
+      if ($length -eq $one) {
+        $tmpstr = '1'
+      }
+      if ($length -eq $four) {
+        $tmpstr = '4'
+      }
+      if ($length -eq $seven) {
+        $tmpstr = '7'
+      }
+      elseif ($length -eq $eight) {
+        $tmpstr = '8'
+      }
 
-        if ($length -eq $one) {
-            $readingOutput += '1'
+
+      # Part two: Handle the others 2,3,5,6,9,0
+      if ($length -eq 5) {
+        $tmpstr = '3'
+        if ($item -contains 'g') {
+          $tmpstr = '2'
         }
-        if ($item -contains 'g' -and $length -eq 5) {
-            $readingOutput += '2'
+        if ($item -contains 'e') {
+          $tmpstr = '5'
         }
-        if ($length -eq 5) {
-            $readingOutput += '3'
+      }
+      
+      if ($length -eq 6){
+        if (($item -notcontains 'd') -or ($item -notcontains 'b') -or ($item -notcontains 'a')) {
+          $tmpstr = '6'
+          Write-Host "Six"
         }
-        if ($length -eq $four) {
-            $readingOutput += '4'
+        if ($item -notcontains 'g') {
+          $tmpstr = '9'
         }
-        if ($item -contains 'e' -and $length -eq 5) {
-            $readingOutput += '5'
+        if ($item -notcontains 'f' -and $item -contains 'g') {
+          $tmpstr = '0'
         }
-        if ($length -eq 6 -and $item -contains 'f' -and $item -contains 'g') {
-            $readingOutput += '6'
-        }
-        if ($length -eq $seven) {
-            $readingOutput += '7'
-        }
-        if ($length -eq $eight) {
-            $readingOutput += '8'
-        }
-        if ($length -eq 6 -and $item -contains 'f' -and $item -contains 'a') {
-            $readingOutput += '9'
-        }
-        if ($length -eq 6 -and $item -contains 'a' -and $item -contains 'g') {
-            $readingOutput += '0'
-        }
+      }
+
+
+        $readingOutput += $tmpstr
+        $tmpstr = ''
     }
+
+
 
     Write-Host "String [$output] output converted to : [$readingOutput]"
 }
