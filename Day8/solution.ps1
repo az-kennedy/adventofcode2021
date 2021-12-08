@@ -61,18 +61,30 @@ foreach ($reading in $readings) {
     }
 
     # 2
+    if ($length -eq 5) {
+      $twoKey = $signal
+    }
 
     # 3
 
     # 4
+    if ($length -eq $four) {
+      $fourKey = $signal
+    }
 
     # 5
 
     # 6
 
     # 7
+    if ($length -eq $seven) {
+      $sevenKey = $signal
+    }
 
     # 8
+    if ($length -eq $eight) {
+      $eightKey = $signal
+    }
 
     # 9
   }
@@ -81,13 +93,69 @@ foreach ($reading in $readings) {
   $readingOutput = ''
   $sum = 0
   foreach ($code in $output) {
-    if ($code -eq $oneKey) {
+    $length = $code.Length
+    $base = $code.ToCharArray()
+
+
+    # Logic:
+    <#
+    char[] str1 = s1.toCharArray();
+    char[] str2 = s2.toCharArray();
+    Sort each char[]
+
+    Arrays.sort(str1);
+    Arrays.sort(str2);
+    Check if equal
+
+    return Arrays.equals(str1, str2);
+    #>
+
+    # 0
+
+    # 1
+    if ($length -eq $one) {
       $readingOutput += '1'
     }
+
+    # 2
+    if ($length -eq 5) {
+      Write-Host $twoKey
+      $compare = $twoKey.ToCharArray()
+      $results = Compare-Object -ReferenceObject $base -DifferenceObject $compare
+
+      # If null than it is a match and add to readingOutput
+      if ($null -eq $results) {
+        $readingOutput += '2'
+      }
+      
+    }
+
+    # 3
+
+    # 4
+    if ($length -eq $four) {
+      $readingOutput += '4'
+    }
+
+    # 5
+
+    # 6
+
+    # 7
+    if ($length -eq $seven) {
+      $readingOutput += '7'
+    }
+
+    # 8
+    if ($length -eq $eight) {
+      $readingOutput += '8'
+    }
+
+    # 9
   }
   
 
-  Write-Host "String [$output] output converted to : [$readingOutput]"
+  Write-Host "String [$signals | $output] output converted to : [$readingOutput]"
 }
 
 
