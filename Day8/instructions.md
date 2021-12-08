@@ -59,8 +59,7 @@ In the output values, how many times do digits 1, 4, 7, or 8 appear?
 --- Part Two ---
 Through a little deduction, you should now be able to determine the remaining digits. Consider again the first example above:
 
-acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
-cdfeb fcadb cdfeb cdbaf
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
 After some careful analysis, the mapping between signal wires and segments only make sense in the following configuration:
 
  dddd
