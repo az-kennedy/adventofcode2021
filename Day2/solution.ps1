@@ -10,21 +10,25 @@ $data = Get-Content C:\Users\Thomas\Documents\code\REPOS\adventofcode2021\Day2\d
 $movement = $data.Split([Environment]::NewLine).Trim()
 $depth = 0
 $hposition = 0
+$aim = 0
 
 foreach ($move in $movement) {
     $direction = $move.split(' ')[0].toLower()
     $number = $move.split(' ')[1]
 
     if ($direction -eq 'down') {
-        $depth += $number
+        #$depth += $number
+        $aim += $number
     }
 
     if ($direction -eq 'forward') {
         $hposition += $number
+        $depth += $($aim * $number)
     }
 
     if ($direction -eq 'up') {
-        $depth -= $number
+        #$depth -= $number
+        $aim -= $number
     }
 }
 
