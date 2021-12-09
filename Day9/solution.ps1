@@ -2,13 +2,13 @@
 # Your first goal is to find the low points - the locations that are lower 
 # than any of its adjacent locations.
 
-#$data = Get-Content C:\Users\Thomas\Documents\code\REPOS\adventofcode2021\Day9\data.txt
+$data = Get-Content C:\Users\Thomas\Documents\code\REPOS\adventofcode2021\Day9\data.txt
 
-$data = '2199943210
-3987894921
-9856789892
-8767896789
-9899965678'
+#$data = '2199943210
+#3987894921
+#9856789892
+#8767896789
+#9899965678'
 
 $heightmap = $data.Split([Environment]::NewLine)
 
@@ -40,9 +40,9 @@ function Find-LowPointRisk {
   $NextRowCA = $NextRow.ToCharArray()
   $rowRisk = 0
 
-  #Write-Host "Previous Row: [$PreviousRowCA]"
-  #Write-Host "Current Row: [$CurrentRowCA]"
-  #Write-Host "Next Row: [$NextRowCA]"
+  Write-Host "Previous Row: [$PreviousRowCA]"
+  Write-Host "Current Row: [$CurrentRowCA]"
+  Write-Host "Next Row: [$NextRowCA]"
   
 
   for ($i = 0; $i -lt $CurrentRowCA.Count; $i++) {
@@ -71,10 +71,11 @@ function Find-LowPointRisk {
     #Write-Host "MyArray = [$myArray]"
 
     $lowest = ($myArray | Measure-Object -Minimum).Minimum
+    $max = ($myArray | Measure-Object -Maximum).Maximum
 
     #Write-Host "Lowest : $lowest"
 
-    if ($lowest -eq $number) {
+    if ($lowest -eq $number -and $lowest -ne $max) {
       Write-Host "Low point of [$number], risk level of [$($number+1)]"
       $rowRisk += $number +1
       #return $number
