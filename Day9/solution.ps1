@@ -93,8 +93,15 @@ function Find-ThreeBasins {
     [Array]
     $data
   )
+  #$returnArray = @(1,2,3)
+  $returnArray = @()
+  $basins = @{}
+  $basinCnt = 1
 
-  $returnArray = @(1,2,3)
+  foreach ($row in $data) {
+    # find out the basin size.  Build it into the hash.  
+  }
+
 
   return $returnArray
 }
@@ -120,7 +127,7 @@ for ($i = 0; $i -lt $heightmapNew.Count; $i++) {
 }
 #>
 
-$threeBasins = Find-ThreeBasins -data $data
+$threeBasins = Find-ThreeBasins -data $heightmapNew
 
 $product = $threeBasins[0] * $threeBasins[1] * $threeBasins[2]
 
