@@ -2,13 +2,13 @@
 # Your first goal is to find the low points - the locations that are lower 
 # than any of its adjacent locations.
 
-$data = Get-Content C:\Users\Thomas\Documents\code\REPOS\adventofcode2021\Day9\data.txt
+#$data = Get-Content C:\Users\Thomas\Documents\code\REPOS\adventofcode2021\Day9\data.txt
 
-#$data = '2199943210
-#3987894921
-#9856789892
-#8767896789
-#9899965678'
+$data = '2199943210
+3987894921
+9856789892
+8767896789
+9899965678'
 
 $heightmap = $data.Split([Environment]::NewLine)
 
@@ -85,6 +85,22 @@ function Find-LowPointRisk {
   return $rowRisk
 }
 
+
+function Find-ThreeBasins {
+  param (
+    # Data
+    [Parameter(Mandatory=$true)]
+    [Array]
+    $data
+  )
+
+  $returnArray = @(1,2,3)
+
+  return $returnArray
+}
+
+
+<#
 $riskSum = 0
 
 for ($i = 0; $i -lt $heightmapNew.Count; $i++) {
@@ -102,5 +118,11 @@ for ($i = 0; $i -lt $heightmapNew.Count; $i++) {
   $riskSum += $rowRisk
 
 }
+#>
 
-return "Sum of risk points: [$riskSum]"
+$threeBasins = Find-ThreeBasins -data $data
+
+$product = $threeBasins[0] * $threeBasins[1] * $threeBasins[2]
+
+
+return "Multiplication of largest three basins = $product"
